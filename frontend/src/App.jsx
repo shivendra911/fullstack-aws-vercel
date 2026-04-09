@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'sans-serif' }}>
-      <h1>AWS Load Balancer + Vercel UI</h1>
+      <h1>My Automated Fullstack App</h1>
       <button 
         onClick={fetchData} 
         style={{ padding: '10px 20px', fontSize: '16px', cursor: 'pointer', backgroundColor: '#0070f3', color: 'white', border: 'none', borderRadius: '5px' }}
