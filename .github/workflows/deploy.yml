@@ -1,0 +1,40 @@
+name: Deploy Backend to EC2
+
+# 1. When should this robot run?
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'backend/**' # Only run if changes are made inside the backend folder
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 2. Grab the latest code from GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 3. Securely copy the backend files to your AWS server
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "backend/*"
+          target: "/home/ec2-user/backend-project"
+          strip_components: 1
+
+      # 4. Run the PM2 restart commands on the server
+      - name: Execute SSH Commands to Restart PM2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ec2-user/backend-project
+            npm install
+            pm2 restart all

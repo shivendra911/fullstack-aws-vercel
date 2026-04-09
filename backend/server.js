@@ -23,7 +23,7 @@ app.use('/api', limiter);
 
 app.get('/api/data', (req, res) => {
     res.json({
-        message: "Successfully fetched data from the backend!",
+        message: "Successfully fetched data from my CI/CD automated backend!",
         server: SERVER_NAME,
         timestamp: new Date().toISOString()
     });
