@@ -63,3 +63,6 @@ app.get('/api/data', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server [${SERVER_NAME}] is running on port ${PORT}`);
 });
+
+
+// 5. Health Check Route (For Nginx)
