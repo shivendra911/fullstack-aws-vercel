@@ -5,6 +5,10 @@ const rateLimit = require('express-rate-limit');
 const os = require('os');
 
 const app = express();
+
+// Trust the first proxy (Vercel/Nginx) to get the real client IP
+app.set('trust proxy', 1);
+
 const PORT = process.env.PORT || 3000;
 const SERVER_NAME = process.env.SERVER_NAME || os.hostname();
 
